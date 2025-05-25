@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creative Resources Hub | Professional Tools & Prompts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --primary-light: #e6f0ff;
+      --secondary: #7209b7;
+      --accent: #f72585;
+      --text: #1a1a1a;
+      --text-light: #6b7280;
+      --background: #ffffff;
+      --card-bg: #ffffff;
+      --card-hover: #f9fafb;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    .auth-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 5%;
+      background: var(--background);
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .auth-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .auth-links a:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .auth-links a.primary {
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+    }
+
+    .auth-links a.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .auth-links .user-greeting {
+      color: var(--text);
+      font-weight: 500;
+      margin-right: 8px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 80px 5% 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd' opacity='0.1'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .header p {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+
+    .search-bar {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: var(--radius-lg);
+      border: none;
+      font-size: 1rem;
+      box-shadow: var(--shadow-md);
+      padding-left: 52px;
+    }
+
+    .search-bar i {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: -40px auto 0;
+      padding: 0 5%;
+      flex: 1;
+      position: relative;
+      z-index: 10;
+    }
+
+    .content-card {
+      background: var(--background);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.75rem;
+      margin-bottom: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .category-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .category-card h2 {
+      margin-bottom: 12px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .category-card p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .category-badge {
+      background: var(--primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: auto;
+    }
+
+    .prompts-page {
+      display: none;
+      flex-direction: column;
+    }
+
+    .back-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 24px;
+      align-self: flex-start;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .back-button:hover {
+      background: var(--primary-dark);
+      transform: translateX(-2px);
+    }
+
+    #promptsList {
+      display: grid;
+      gap: 16px;
+    }
+
+    .prompt-item {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary);
+      position: relative;
+      display: flex;
+      gap: 16px;
+    }
+
+    .prompt-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .prompt-number {
+      font-weight: 600;
+      color: var(--primary);
+      min-width: 24px;
+    }
+
+    .prompt-content {
+      flex: 1;
+    }
+
+    .prompt-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .prompt-actions button {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prompt-actions button:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: var(--primary-light);
+    }
+
+    .empty-state h3 {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    footer {
+      background: var(--card-bg);
+      padding: 40px 5%;
+      text-align: center;
+      margin-top: 80px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .copyright {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.25rem;
+      }
+
+      .header p {
+        font-size: 1rem;
+      }
+
+      .content-card {
+        padding: 24px;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 60px 5% 80px;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .auth-links {
+        padding: 12px 5%;
+        justify-content: center;
+      }
+
+      .category-card {
+        padding: 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-links">
+    {% if session.get('username') %}
+      {% if session.get('is_admin') == 1 %}
+        <a href="{{ url_for('admin_dashboard') }}">
+          <i class="fas fa-lock"></i> Admin Panel
+        </a>
+      {% endif %}
+      <span class="user-greeting">{{ session['username'] }}</span>
+      <a href="{{ url_for('logout') }}">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    {% else %}
+      <a href="{{ url_for('login') }}">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </a>
+      <a href="{{ url_for('signup') }}" class="primary">
+        <i class="fas fa-user-plus"></i> Sign Up
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="header">
+    <div class="header-content">
+      <h1>Unlock Your Creative Potential</h1>
+      <p>Access professional tools, prompts, and resources to enhance your creative workflow and productivity</p>
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search prompts...">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="content-card">
+      <div id="homepage" class="categories-grid">
+        <div class="category-card" onclick="showPrompts('Design')">
+          <div class="category-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h2>Design</h2>
+          <p>UI/UX, Graphic Design, & more</p>
+          <span class="category-badge">12 prompts</span>
+        </div>
+        <div class="category-card" onclick="showPrompts('Art')">
+          <div class="category-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h2>Art</h2>
+          <p>Painting, Digital Art, Sketching</p>
+          <span class="category-badge">8 prompts</span>
+        </div>
+        <div class="category-card" onclick="showPrompts('College')">
+          <div class="category-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h2>College</h2>
+          <p>Assignment Help, Study Tips</p>
+          <span class="category-badge">15 prompts</span>
+        </div>
+        <div class="category-card" onclick="showPrompts('Exam')">
+          <div class="category-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h2>Exam</h2>
+          <p>Prep Questions, Review Guides</p>
+          <span class="category-badge">10 prompts</span>
+        </div>
+        <div class="category-card" onclick="showPrompts('Work')">
+          <div class="category-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h2>Work</h2>
+          <p>Emails, Presentations, Projects</p>
+          <span class="category-badge">18 prompts</span>
+        </div>
+        <div class="category-card" onclick="showPrompts('Marketing')">
+          <div class="category-icon">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <h2>Marketing</h2>
+          <p>Campaigns, Brand Pitches, Ads</p>
+          <span class="category-badge">14 prompts</span>
+        </div>
+      </div>
+
+      <div id="promptsPage" class="prompts-page">
+        <button class="back-button" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to Categories
+        </button>
+        <h2 class="page-title" id="promptsPageTitle">Prompts</h2>
+        <div id="promptsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <div class="copyright">
+        &copy; 2023 Creative Resources Hub. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const prompts = {{ prompts | tojson }};
+    const isLoggedIn = {{ is_logged_in | tojson }};
+
+    function showPrompts(category) {
+      if (!isLoggedIn) {
+        alert("Please log in to view the prompts.");
+        window.location.href = "{{ url_for('login') }}";
+        return;
+      }
+
+      document.getElementById('homepage').style.display = 'none';
+      document.getElementById('promptsPage').style.display = 'flex';
+      document.getElementById('promptsPageTitle').textContent = `${category} Prompts`;
+      
+      const promptsList = document.getElementById('promptsList');
+      promptsList.innerHTML = '';
+
+      if (!prompts[category] || prompts[category].length === 0) {
+        promptsList.innerHTML = `
+          <div class="empty-state">
+            <i class="far fa-folder-open"></i>
+            <h3>No prompts available</h3>
+            <p>There are currently no prompts in this category.</p>
+          </div>
+        `;
+        return;
+      }
+
+      prompts[category].forEach((prompt, index) => {
+        const div = document.createElement('div');
+        div.className = 'prompt-item';
+        div.innerHTML = `
+          <div class="prompt-number">${index + 1}.</div>
+          <div class="prompt-content">${prompt}</div>
+          <div class="prompt-actions">
+            <button title="Copy to clipboard" onclick="copyToClipboard('${prompt.replace(/'/g, "\\'")}')">
+              <i class="far fa-copy"></i>
+            </button>
+            <button title="Save to favorites">
+              <i class="far fa-star"></i>
+            </button>
+          </div>
+        `;
+        promptsList.appendChild(div);
+      });
+    }
+
+    function goBack() {
+      document.getElementById('homepage').style.display = 'grid';
+      document.getElementById('promptsPage').style.display = 'none';
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          alert('Prompt copied to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    }
+  </script>
+</body>
+</html>
