@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --border-radius: 4px;
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-links a.logout {
+            color: var(--accent-color);
+        }
+
+        .nav-links a.logout:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: var(--box-shadow);
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-right: 10px;
+            padding: 5px 8px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .action-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .action-links a.delete {
+            color: var(--accent-color);
+        }
+
+        .action-links a.delete:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid var(--primary-color);
+        }
+
+        .footer-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .footer-links a.logout {
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .footer-links a.logout:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .status-message {
+            padding: 10px 15px;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                margin-top: 15px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Admin Dashboard: Manage Prompts</h1>
+                <h2>Welcome Admin {{ username }}</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home Page</a>
+                <a href="{{ url_for('add_prompt') }}">Add New Prompt</a>
+                <a href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+            </div>
+        </header>
+
+        <!-- Table to display all prompts -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Prompt Text</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prompt in prompts %}
+                <tr>
+                    <td>{{ prompt.id }}</td>
+                    <td>{{ prompt.text }}</td>
+                    <td>{{ prompt.category }}</td>
+                    <td class="action-links">
+                        <a href="{{ url_for('update_prompt', id=prompt.id) }}">Edit</a>
+                        <a href="{{ url_for('delete_prompt', id=prompt.id) }}" class="delete" onclick="return confirm('Are you sure you want to delete this prompt?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="footer-links">
+            <a href="{{ url_for('admin_dashboard') }}">Back to Admin Panel</a>
+            <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

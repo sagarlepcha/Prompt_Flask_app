@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Resources Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: #EEE0C9; color: #494949; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 40px 0; background-color: #96B6C5; color: #F1F0E8; }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px 0;
+        }
+        .category-card {
+            background: #ADC4CE;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #96B6C5;
+        }
+        .prompts-page { display: none; padding: 30px 0; }
+        .back-button {
+            background: #96B6C5;
+            color: #F1F0E8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+        .back-button:hover { opacity: 0.9; }
+        .prompts-list {
+            background: #F1F0E8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(73,73,73,0.1);
+        }
+        .prompt-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #EEE0C9;
+            border-radius: 5px;
+            border-left: 4px solid #96B6C5;
+        }
+        .auth-links { text-align: right; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="auth-links">
+       {% if session.get('username') %}
+        {% if session.get('is_admin') == 1 %}
+            <a href="{{ url_for('admin_dashboard') }}">Back to Admin Panel</a> |
+        {% endif %}
+        Welcome, {{ session['username'] }} | <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('signup') }}">Signup</a>
+    {% endif %}
+    </div>
+    <div class="header">
+        <h1>Creative Resources Hub</h1>
+        <p>Explore resources by category</p>
+    </div>
+    <div class="container">
+        <div class="categories-grid" id="homepage">
+            <div class="category-card" onclick="showPrompts('design')">
+                <h2>Design</h2>
+                <p>UI/UX, Graphic Design, & more</p>
+            </div>
+            <div class="category-card" onclick="showPrompts('art')">
+                <h2>Art</h2>
+                <p>Drawing, Painting, & more</p>
+            </div>
+            <div class="category-card" onclick="showPrompts('college')">
+                <h2>College</h2>
+                <p>Academic resources & guides</p>
+            </div>
+            <div class="category-card" onclick="showPrompts('exam')">
+                <h2>Exam</h2>
+                <p>Preparation & study tips</p>
+            </div>
+            <div class="category-card" onclick="showPrompts('work')">
+                <h2>Work</h2>
+                <p>Career development & productivity</p>
+            </div>
+        </div>
+        <div class="prompts-page" id="promptsPage">
+            <button class="back-button" onclick="goBack()">← Back to Categories</button>
+            <div class="prompts-list" id="promptsList"></div>
+        </div>
+    </div>
+    <script>
+        const prompts = {
+            design: [
+                "Create a mobile app onboarding flow for new users",
+                "Design a sustainable packaging concept for food products",
+                "Develop a brand identity for a modern tech startup",
+                "Create a user-friendly dashboard for analytics data",
+                "Redesign a popular website's navigation system"
+            ],
+            art: [
+                "Create a series of illustrations depicting urban life",
+                "Paint a landscape using only complementary colors",
+                "Develop a character design for a fantasy novel",
+                "Create abstract art representing digital anxiety",
+                "Sculpt a human figure using unconventional materials"
+            ],
+            college: [
+                "Develop a study schedule for final exams week",
+                "Create a template for academic paper formatting",
+                "Plan a campus event for international students",
+                "Develop a system for organizing research materials",
+                "Create a guide for effective note-taking strategies"
+            ],
+            exam: [
+                "Create a 30-day GRE preparation plan",
+                "Develop flashcards for biology terminology",
+                "Make a checklist for exam day preparation",
+                "Create practice questions for calculus basics",
+                "Develop a mind map for historical events timeline"
+            ],
+            work: [
+                "Design a productivity system for remote workers",
+                "Create a template for client meeting notes",
+                "Develop a workflow for team collaboration",
+                "Design a time-blocking schedule for managers",
+                "Create a guide for effective email communication"
+            ]
+        };
+        function showPrompts(category) {
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('promptsPage').style.display = 'block';
+            const promptsList = document.getElementById('promptsList');
+            promptsList.innerHTML = '';
+            prompts[category].forEach(prompt => {
+                const div = document.createElement('div');
+                div.className = 'prompt-item';
+                div.textContent = prompt;
+                promptsList.appendChild(div);
+            });
+        }
+        function goBack() {
+            document.getElementById('homepage').style.display = 'grid';
+            document.getElementById('promptsPage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

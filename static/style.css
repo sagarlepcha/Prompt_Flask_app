@@ -1,0 +1,222 @@
+/* styles.css - Main stylesheet for Creative Resources Hub */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #EEE0C9;
+    color: #494949;
+    line-height: 1.6;
+}
+
+a {
+    color: #96B6C5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #5F8BA8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #96B6C5;
+    color: #F1F0E8;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Auth Links */
+.auth-links {
+    text-align: right;
+    padding: 15px 20px;
+    background-color: #F1F0E8;
+    border-bottom: 1px solid #ADC4CE;
+}
+
+.auth-links a {
+    margin-left: 15px;
+}
+
+/* Form Styles (for login/signup) */
+form {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #F1F0E8;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5F8BA8;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px;
+    border: 1px solid #ADC4CE;
+    border-radius: 5px;
+    background: #FFF;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #96B6C5;
+    color: #F1F0E8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: #5F8BA8;
+}
+
+/* Flash Messages */
+ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+ul li {
+    padding: 10px;
+    background: #FFE4E1;
+    border-left: 4px solid #FF6B6B;
+    margin-bottom: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+/* Categories Grid */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 30px 0;
+}
+
+.category-card {
+    background: #ADC4CE;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    border-color: #96B6C5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-card h2 {
+    color: #F1F0E8;
+    margin-bottom: 10px;
+}
+
+/* Prompts Page */
+.prompts-page {
+    display: none;
+    padding: 30px 0;
+}
+
+.back-button {
+    background: #96B6C5;
+    color: #F1F0E8;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.back-button:hover {
+    background: #5F8BA8;
+    transform: translateX(-3px);
+}
+
+.prompts-list {
+    background: #F1F0E8;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.prompt-item {
+    padding: 15px;
+    margin: 15px 0;
+    background: #EEE0C9;
+    border-radius: 5px;
+    border-left: 4px solid #96B6C5;
+    transition: transform 0.3s ease;
+}
+
+.prompt-item:hover {
+    transform: translateX(5px);
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #F1F0E8;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard h2 {
+    color: #5F8BA8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-dashboard p {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-dashboard a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #96B6C5;
+    color: #F1F0E8;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.admin-dashboard a:hover {
+    background: #5F8BA8;
+}
