@@ -1,4 +1,4 @@
-\=<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -98,45 +98,7 @@
       margin-right: 8px;
     }
 
-    .custom-alert-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.custom-alert-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.custom-alert-icon {
-  color: #4361ee; /* Your primary color */
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.custom-alert-btn {
-  background: #4361ee;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  font-weight: 500;
-}
+    
     
 /* Header Styles */
 .header {
@@ -694,7 +656,9 @@ h2 {
             <button title="Copy to clipboard" onclick="copyToClipboard('${prompt.replace(/'/g, "\\'")}')">
               <i class="far fa-copy"></i>
             </button>
-           
+            <button title="Save to favorites">
+              <i class="far fa-star"></i>
+            </button>
           </div>
         `;
         promptsList.appendChild(div);
@@ -715,12 +679,6 @@ h2 {
           console.error('Failed to copy: ', err);
         });
     }
-
-
-
-
-   
-
 
     
   </script>

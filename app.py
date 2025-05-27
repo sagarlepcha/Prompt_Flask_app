@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from models import db, Prompt
 from collections import defaultdict
 import sqlite3
+from rapidfuzz import fuzz
 
 app = Flask(__name__)
 
@@ -20,6 +21,34 @@ def init_db():
                         )''')
         conn.execute("INSERT OR IGNORE INTO users (username, password, is_admin) VALUES ('secret', 'secret', 1)")
 init_db()
+
+def get_best_matches(query, prompts, threshold=50):
+    matches = []
+    for p in prompts:
+        score = fuzz.partial_ratio(query, p)
+        if score >= threshold:
+            matches.append((p, score))
+    return [match[0] for match in sorted(matches, key=lambda x: -x[1])]
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('q', '').strip().lower()
+    if not query:
+        return redirect(url_for('index'))
+
+    all_prompts = Prompt.query.all()
+    prompt_texts = [prompt.text for prompt in all_prompts]
+
+    # Use fuzzy matching
+    close_matches = get_best_matches(query, prompt_texts, threshold=50)
+
+    categorized = defaultdict(list)
+    for prompt in all_prompts:
+        if prompt.text in close_matches:
+            categorized[prompt.category].append(prompt.text)
+
+    return render_template('index.html', prompts=categorized, is_logged_in='username' in session, query=query)
+
 
 
 
@@ -75,6 +104,9 @@ def admin_dashboard():
 
 @app.route('/admin/add', methods=['GET', 'POST'])
 def add_prompt():
+    if 'username' not in session or session.get('is_admin') != 1:
+        
+        return redirect(url_for('login'))
     if request.method == 'POST':
         prompt_text = request.form['prompt']
         category = request.form['category']
@@ -89,6 +121,9 @@ def add_prompt():
 
 @app.route('/admin/delete/<int:id>', methods=['GET'])
 def delete_prompt(id):
+    if 'username' not in session or session.get('is_admin') != 1:
+        
+        return redirect(url_for('login'))
     prompt = Prompt.query.get_or_404(id)
     db.session.delete(prompt)
     db.session.commit()
@@ -97,6 +132,9 @@ def delete_prompt(id):
 @app.route('/admin/update/<int:id>', methods=['GET', 'POST'])
 def update_prompt(id):
     prompt = Prompt.query.get_or_404(id)
+    if 'username' not in session or session.get('is_admin') != 1:
+        
+        return redirect(url_for('login'))
     if request.method == 'POST':
         prompt.text = request.form['prompt']
         prompt.category = request.form['category']  # Update category
