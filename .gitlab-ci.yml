@@ -45,33 +45,18 @@
 #   rules:
 #     - if: '$CI_COMMIT_BRANCH == "main"'
 
-
 stages:
   - test
-  - deploy
 
 variables:
-  PIP_DISABLE_PIP_VERSION_CHECK: "1"
-
-# Use Docker with Python
-image: python:3.10
+  FLASK_ENV: testing
+  PYTHONUNBUFFERED: 1
 
 before_script:
   - python -V
-  - pip install --upgrade pip
   - pip install -r requirements.txt
 
-# Automated Testing Stage
 test:
   stage: test
   script:
-    - pytest --cov=.
-
-# Optional Deployment Stage (add your deployment logic)
-deploy:
-  stage: deploy
-  script:
-    - echo "Add your deployment steps here (e.g., copy files, restart server)"
-  only:
-    - main  # or your default branch
-
+    - pytest tests/
