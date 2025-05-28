@@ -47,18 +47,15 @@
 
 image: python:3.10
 
+
 stages:
   - test
 
-variables:
-  FLASK_ENV: testing
-  PYTHONUNBUFFERED: 1
-
 before_script:
-  - python -V
   - pip install -r requirements.txt
+  - export PYTHONPATH=$CI_PROJECT_DIR  # ensure app.py is found
 
-test_app:
+test:
   stage: test
   script:
     - pytest tests/
