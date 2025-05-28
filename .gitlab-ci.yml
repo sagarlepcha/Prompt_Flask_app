@@ -60,8 +60,5 @@ before_script:
 
 test_app:
   stage: test
-  image: python:3.10
-    - pip install -r requirements.txt
-    - export PYTHONPATH=.
   script:
     - pytest tests/
