@@ -1,0 +1,42 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Step 1: Build Stage (optional/dummy)
+build-job:
+  stage: build
+  script:
+    - echo "Compiling the project..."
+    - mkdir -p build
+    - echo "Build complete!" > build/status.txt
+  artifacts:
+    paths:
+      - build/
+
+# Step 2: Test Stage with Coverage
+test-job:
+  stage: test
+  dependencies:
+    - build-job
+  script:
+    - python -V
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - pytest --cov=app --cov-report=xml
+  artifacts:
+    when: always
+    paths:
+      - coverage.xml
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+
+# Step 3: Deploy Stage
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploying the application..."
+    - echo "Deployed at $(date)"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
