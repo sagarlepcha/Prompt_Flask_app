@@ -2,3 +2,4 @@ Flask
 Flask_SQLAlchemy
 pytest
 pytest-cov
+rapidfuzz
